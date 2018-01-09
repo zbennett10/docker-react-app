@@ -1,0 +1,19 @@
+version: '2'
+services:
+    proxy:
+      image: nginx:alpine
+      container_name: proxy 
+      volumes:
+         - ./proxy:/etc/nginx/conf.d
+      depends_on:
+         - your-app 
+      ports:
+         - "80:80"
+              
+    your-app:
+      build:
+        context: .
+        dockerfile: "Dockerfile-dev"
+      container_name: your-app 
+      volumes: 
+        - ./src:/usr/src/app/src
